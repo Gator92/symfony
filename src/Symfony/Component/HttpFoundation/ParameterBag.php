@@ -276,7 +276,7 @@ class ParameterBag implements \IteratorAggregate, \Countable
             $options['flags'] = FILTER_REQUIRE_ARRAY;
         }
 
-        return filter_var($value, $filter, $options);
+        return ('' === ($return = filter_var($value, $filter, $options)) || !isset($return)) && isset($default) ? $default : $return;
     }
 
     /**
